@@ -77,6 +77,7 @@ static proxy_settings_t user_pw_settings (std::string const& server, UInt32 port
 #if MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_4
 static void pac_proxy_callback (void* client, CFArrayRef proxyList, CFErrorRef error)
 {
+	fprintf(stderr, "In callback\n");
 	proxy_settings_t& settings = *(proxy_settings_t*)client;
 	settings.enabled = true;
 
@@ -137,7 +138,13 @@ proxy_settings_t get_proxy_settings (std::string const& url)
 
 			CFURLRef pacURL                  = CFURLCreateWithString(kCFAllocatorDefault, cf::wrap(pacString), NULL);
 			CFURLRef targetURL               = CFURLCreateWithString(kCFAllocatorDefault, cf::wrap(url), NULL);
+			fprintf(stderr, "PAC URL:\n");
+			CFShow(pacURL);
+			fprintf(stderr, "Target URL:\n");
+			CFShow(targetURL);
+			fprintf(stderr, "Calling CFNetworkExecuteProxyAutoConfigurationURL\n");
 			CFRunLoopSourceRef runLoopSource = CFNetworkExecuteProxyAutoConfigurationURL(pacURL, targetURL, &pac_proxy_callback, &context);
+			fprintf(stderr, "Got back from CFNetworkExecuteProxyAutoConfigurationURL\n");
 			CFRelease(targetURL);
 			CFRelease(pacURL);
 
