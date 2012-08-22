@@ -9,8 +9,8 @@ FLAGS += -Wno-address-of-temporary
 FLAGS += -IShared/include
 
 # FLAGS += -D_GLIBCXX_DEBUG
-FLAGS += -DNDEBUG -Os
-# LINK   = OakDebug
+# FLAGS += -DNDEBUG -Os
+LINK   = OakDebug
 
 CXX_FLAGS    += -std=gnu++11
 OBJC_FLAGS   += -std=c99
