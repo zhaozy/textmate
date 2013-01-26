@@ -1,4 +1,3 @@
-#import <OakAppKit/OakStatusBar.h>
 #import <text/types.h>
 
 @protocol OTVStatusBarDelegate <NSObject>
@@ -9,7 +8,7 @@
 - (void)toggleMacroRecording:(id)sender;
 @end
 
-@interface OTVStatusBar : OakStatusBar
+@interface OTVStatusBar : NSView
 - (void)setCaretPosition:(std::string const&)range;
 @property (nonatomic, copy)   NSString* grammarName;
 @property (nonatomic, copy)   NSString* symbolName;
